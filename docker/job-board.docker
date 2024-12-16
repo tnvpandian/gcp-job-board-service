@@ -1,0 +1,48 @@
+# Stage 1: Build the application
+FROM node:18 AS builder
+
+
+ENV APP_PORT=9876
+
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY . .
+
+# Build the application
+RUN npm run build job-board-backend-app
+
+# Stage 2: Create the production image
+FROM node:18-alpine AS runner
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY package*.json ./
+
+# Install only production dependencies
+RUN npm install --only=production
+
+# Copy built application from the builder stage
+COPY --from=builder /app/dist ./dist
+
+# Copy any other files required for the app (e.g., configuration files)
+COPY --from=builder /app/.env ./
+
+ENV PORT=9876
+
+
+# Expose application port
+EXPOSE $PORT
+
+# Define the command to run the application
+CMD ["node", "dist/apps/job-board-backend-app/main"]
