@@ -112,6 +112,57 @@ nest generate app jobs-service
 
 
 
-docker build -f docker/job-board.docker -t job-board-backend-app:20241216.001 .
-docker run -p 9876 --env-file env_for_docker/.env.job-board job-board-backend-app:20241216.001
+docker build -f docker/job-board.docker --no-cache -t job-board-backend-app:20241216.005 .
+docker run --name job-board-backend-app -p 9876:9876 --env-file env_for_docker/.env.job-board job-board-backend-app:20241216.005
+
+docker build -f docker/job-board.docker --no-cache -t job-board-backend-app:20241216.006 .
+docker run --name job-board-backend-app -p 9876:9876 --env-file env_for_docker/.env.job-board job-board-backend-app:20241216.006
+
+
+docker build -f docker/job-board.docker --no-cache -t job-board-backend-app:20241216.01 .
+docker run --name job-board-backend-app -p 9876:9876 --env-file env_for_docker/.env.job-board job-board-backend-app:20241216.01
+
+docker build -f docker/job-service.docker --no-cache -t job-service:20241216.01 .
+docker run --name job-service -p 9877:9877 --env-file env_for_docker/.env.job-service job-service:20241216.01
+
+
+docker tag job-board-backend-app:20241216.01 tnvpandian/cloud-apps:job-board-20241216.01
+docker push tnvpandian/cloud-apps:job-board-20241216.01
+
+
+latest one
+
+docker tag job-board-backend-app:20241216.01 tnvpandian/job-board-gcp:job-board-20241216.01
+docker push tnvpandian/job-board-gcp:job-board-20241216.01
+
+docker tag job-board-backend-app:20241216.01 cloud-apps/job-board-gcp:job-board-20241216.01
+docker push cloud-apps/job-board-gcp:job-board-20241216.01
+
+
+https://gcp-micro-services-559251733449.us-central1.run.app
+
+docker.io/tnvpandian/job-board-gcp:job-board-20241216.01
+
+docker run --name job-board-backend-app -p 9876:9876 --env-file env_for_docker/.env.job-board job-board-backend-app:20241216.02
+
+
+docker build -f docker/job-board.docker --no-cache -t job-board-backend-app:20241216.02 .
+docker tag job-board-backend-app:20241216.02 tnvpandian/job-board-gcp:job-board-20241216.02
+docker push tnvpandian/job-board-gcp:job-board-20241216.02
+
+docker.io/tnvpandian/job-board-gcp
+
+docker.io/tnvpandian/job-board-gcp:job-board-20241216.02
+
+
+docker build -f docker/job-board.docker --platform linux/amd64 --no-cache -t job-board-backend-app:20241216.04 .
+
+
+
+docker buildx build --file docker/job-board.docker --platform linux/amd64 -t job-board-backend-app:20241216.05 .
+docker tag job-board-backend-app:20241216.05 tnvpandian/job-board-gcp:job-board-20241216.05
+docker push tnvpandian/job-board-gcp:job-board-20241216.05
+
+
+docker.io/tnvpandian/job-board-gcp:job-board-20241216.05
 
