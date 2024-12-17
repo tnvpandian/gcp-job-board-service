@@ -98,7 +98,7 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
 
-
+```
 npm i --save @nestjs/config
 # npm i --save @fastify/static @fastify/view handlebars
 
@@ -165,4 +165,10 @@ docker push tnvpandian/job-board-gcp:job-board-20241216.05
 
 
 docker.io/tnvpandian/job-board-gcp:job-board-20241216.05
+```
+
+
+### 20241217: Migrated to Github ###
+
+Repo URL: https://github.com/tnvpandian/gcp-job-board-service
 
