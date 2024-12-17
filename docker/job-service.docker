@@ -18,7 +18,7 @@ RUN npm install
 COPY . .
 
 # Build the application
-RUN npm run build job-board-backend-app
+RUN npm run build jobs-service
 
 # Stage 2: Create the production image
 FROM node:18-alpine AS runner
@@ -45,11 +45,4 @@ ENV PORT=9876
 EXPOSE $PORT
 
 # Define the command to run the application
-# CMD ["node", "dist/apps/job-board-backend-app/main"]
-
-# Copy entrypoint script
-COPY entrypoint.sh ./entrypoint.sh
-RUN chmod +x ./entrypoint.sh
-
-# Run the entrypoint script
-ENTRYPOINT ["./entrypoint.sh"]
+CMD ["node", "dist/apps/jobs-service/main"]
