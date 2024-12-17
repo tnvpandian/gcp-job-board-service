@@ -2,7 +2,7 @@
 FROM node:18 AS builder
 
 
-ENV APP_PORT=9876
+#ENV APP_PORT=9876
 
 
 # Set working directory
