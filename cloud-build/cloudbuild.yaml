@@ -32,6 +32,8 @@ steps:
           --platform managed \
           --region $_REGION \
           --allow-unauthenticated \
+          --set-env-vars APP_PORT=9876,JOB_BOARD_PORT=9876 \
+          --port 9876 \          
           --quiet
 
 substitutions:
@@ -39,8 +41,8 @@ substitutions:
   _REPO_NAME: 'gcp-job-board-service'
   _REPO_OWNER: 'tnvpandian'
   _BRANCH_NAME: 'develop'
-  _REGION: 'us-east1'
-  _SERVICE_NAME: 'tnvp-gcp-job-board'
+  _REGION: 'europe-west2'
+  _SERVICE_NAME: 'cloud-apps-job-board'
 logsBucket: "gs://tnvp-gcp-services-logs"
 
 # Trigger settings
