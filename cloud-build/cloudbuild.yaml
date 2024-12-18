@@ -5,7 +5,7 @@ steps:
     args:
       - '-c'
       - |
-        git clone https://github.com/$REPO_OWNER/$REPO_NAME.git /workspace
+        git clone https://github.com/$_REPO_OWNER/$_REPO_NAME.git /workspace
 
   # Step 2: Set up Node.js environment (Optional if you need to build before Dockerizing)
   - name: 'node:18'
