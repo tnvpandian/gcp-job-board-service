@@ -47,6 +47,8 @@ substitutions:
   _REPO_OWNER: 'tnvpandian'
   _BRANCH_NAME: 'develop'
 
+logsBucket: "gs://tnvp-gcp-services-logs"
+
 # Trigger settings
 #trigger:
 #  branch: '^develop$'
