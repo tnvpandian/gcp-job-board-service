@@ -1,6 +1,5 @@
 options:
  logging: 'CLOUD_LOGGING_ONLY'
- location: 'asia-southeast1'
 
 
 steps:
