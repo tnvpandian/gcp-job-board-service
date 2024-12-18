@@ -172,3 +172,15 @@ docker.io/tnvpandian/job-board-gcp:job-board-20241216.05
 
 Repo URL: https://github.com/tnvpandian/gcp-job-board-service
 
+
+
+gsutil iam ch serviceAccount:[fiery-muse-444714-g2]@cloudbuild.gserviceaccount.com:roles/storage.objectCreator \
+  gs://tnvp-gcp-services-logs
+
+
+gcloud projects add-iam-policy-binding fiery-muse-444714-g2 \
+    --member "serviceAccount:build-service-connection@fiery-muse-444714-g2.iam.gserviceaccount.com" \
+    --role "roles/storage.admin"
+
+
+gcloud projects get-iam-policy fiery-muse-444714-g2

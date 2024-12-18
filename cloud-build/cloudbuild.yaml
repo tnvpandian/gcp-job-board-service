@@ -1,24 +1,5 @@
 steps:
-  # Step 1: Check out the repository
-  - name: 'gcr.io/cloud-builders/git'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        git clone https://github.com/$_REPO_OWNER/$_REPO_NAME.git /workspace
-
-  # Step 2: Set up Node.js environment (Optional if you need to build before Dockerizing)
-  - name: 'node:18'
-    id: 'Install Dependencies'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        cd /workspace
-        npm install
-        npm run build
-
-  # Step 3: Build Docker image
+  # Step 1: Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build Docker Image'
     args:
@@ -27,11 +8,11 @@ steps:
         '-t',
         'gcr.io/$PROJECT_ID/$_IMAGE_NAME:$SHORT_SHA',
         '-f',
-        '../docker/job-board.docker',
+        './docker/job-board.docker',
         '.'
       ]
 
-  # Step 4: Push Docker image to Container Registry
+  # Step 2: Push Docker image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Push Docker Image'
     args:
@@ -52,6 +33,3 @@ logsBucket: "gs://tnvp-gcp-services-logs"
 # Trigger settings
 #trigger:
 #  branch: '^develop$'
-
-
-

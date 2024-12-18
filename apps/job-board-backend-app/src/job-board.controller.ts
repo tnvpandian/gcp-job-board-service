@@ -19,4 +19,10 @@ export class JobBoardController {
   async getCompaniesListDummyData() {
     return await this.appService.getCompaniesListDummyData();
   }
+  
+  @Get('skill-set-list')
+  async getSkillSetsDummyData() {
+    return await this.appService.getSkillSetsDummyData();
+  }
+
 }
