@@ -48,9 +48,9 @@ substitutions:
   _BRANCH_NAME: 'develop'
 
 # Trigger settings
-trigger:
-  branch: '^develop$'
+#trigger:
+#  branch: '^develop$'
 
-options:
- logging: CLOUD_LOGGING_ONLY
+#options:
+# logging: CLOUD_LOGGING_ONLY
 
