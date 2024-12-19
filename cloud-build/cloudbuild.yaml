@@ -1,5 +1,17 @@
 steps:
-  # Step 1: Build Docker image
+  # Step 1: Fetch the service account key from Secret Manager
+  - name: gcr.io/cloud-builders/gcloud
+    id: 'Retrieve Key File from Secrets'
+    entrypoint: bash
+    args:
+      - "-c"
+      - |
+        echo "Fetching service account key..."
+        gcloud secrets versions access latest \
+          --secret="FIRESTORE_SERVICE_ACCOUNT_KEY" > /workspace/keyfile.json
+        ls -l /workspace  # Debug: Check the keyfile is written
+
+  # Step 2: Build Docker image
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build Docker Image'
     args:
@@ -12,7 +24,7 @@ steps:
         '.'
       ]
 
-  # Step 2: Push Docker image to Container Registry
+  # Step 3: Push Docker image to Container Registry
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Push Docker Image'
     args:
@@ -21,8 +33,10 @@ steps:
         'gcr.io/$PROJECT_ID/$_IMAGE_NAME:$SHORT_SHA'
       ]
 
-  # Step 3: Deploy to Cloud Run
+  # Step 4: Deploy to Cloud Run
   - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    id: 'Deploy Service to Cloud Run'
+
     entrypoint: gcloud
     args:
       [
@@ -37,7 +51,7 @@ steps:
         '$_REGION',
         '--allow-unauthenticated',
         '--set-env-vars',
-        'APP_PORT=9876,JOB_BOARD_PORT=9876',
+        'APP_PORT=9876,JOB_BOARD_PORT=9876,GCP_CLOUD_APPS_PROJECT_ID=cloud-app-services,GCP_CLOUD_APPS_DATABASE_ID=cloud-apps-fire-store,GCP_CLOUD_APPS_SA_KEY_FILE_PATH=/workspace/keyfile.json,GOOGLE_APPLICATION_CREDENTIALS=/workspace/keyfile.json,FIRE_STORE_COLLECTION_COMPANY=/company-list,',
         '--port',
         '9876',
         '--quiet'
@@ -50,6 +64,7 @@ substitutions:
   _BRANCH_NAME: 'develop'
   _REGION: 'europe-west2'
   _SERVICE_NAME: 'cloud-apps-job-board'
+
 logsBucket: "gs://tnvp-gcp-services-logs"
 
 # Trigger settings
