@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { JobBoardController } from './job-board.controller';
 import { JobBoardService } from './job-board.service';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigService } from '@nestjs/config';
+import { GlobalModule, FireStoreService } from '@app/global';
 
 @Module({
-  imports: [ConfigModule.forRoot()],
+  imports: [GlobalModule],
   controllers: [JobBoardController],
-  providers: [JobBoardService],
+  providers: [JobBoardService, FireStoreService, ConfigService],
 })
 export class AppModule {}

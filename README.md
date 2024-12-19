@@ -184,3 +184,86 @@ gcloud projects add-iam-policy-binding fiery-muse-444714-g2 \
 
 
 gcloud projects get-iam-policy fiery-muse-444714-g2
+
+
+
+
+URL:
+https://cloud-apps-job-board-616634861511.europe-west2.run.app/job-board/v1/api-docs#/JobBoard/JobBoardController_getSkillSetsDummyData
+
+
+Fire Store:
+cloud-apps-fire-store
+
+
+gcloud projects get-iam-policy cloud-app-services
+
+gcloud projects add-iam-policy-binding fiery-muse-444714-g2 \
+    --member "serviceAccount:build-service-connection@fiery-muse-444714-g2.iam.gserviceaccount.com" \
+    --role "roles/datastore.owner"
+
+
+    1  gc
+    2  date
+    3  uname -a
+    4  gcloud projects get-iam-policy fiery-muse-444714-g2
+    5  gcloud projects get-iam-policy fiery-muse-444714-g2  more
+    6  gcloud projects get-iam-policy fiery-muse-444714-g2 | more
+    7  gcloud projects add-iam-policy-binding fiery-muse-444714-g2     --member "serviceAccount:fiery-muse-444714-g2@cloudbuild.gserviceaccount.com"     --role "roles/storage.admin"
+    8  gcloud projects add-iam-policy-binding s559251733449     --member "s559251733449-compute@developer.gserviceaccount.com"     --role "roles/storage.admin"
+    9  gcloud projects add-iam-policy-binding fiery-muse-444714-g2     --member "s559251733449-compute@developer.gserviceaccount.com"     --role "roles/storage.admin"
+   10  gcloud projects get-iam-policy fiery-muse-444714-g2 | more
+   11  serviceAccount:build-service-connection@fiery-muse-444714-g2.iam.gserviceaccount.com
+   12  gcloud projects add-iam-policy-binding fiery-muse-444714-g2     --member "serviceAccount:s559251733449-compute@developer.gserviceaccount.com"     --role "roles/storage.admin"
+   13  gcloud projects add-iam-policy-binding fiery-muse-444714-g2     --member "serviceAccount:build-service-connection@fiery-muse-444714-g2.iam.gserviceaccount.com"     --role "roles/storage.admin"
+   14  history
+
+
+
+gcloud projects add-iam-policy-binding fiery-muse-444714-g2     --member "serviceAccount:build-service-connection@fiery-muse-444714-g2.iam.gserviceaccount.com"     --role "roles/storage.admin"
+
+616634861511-compute@developer.gserviceaccount.com
+
+
+gcloud projects add-iam-policy-binding cloud-app-services --member "serviceAccount:616634861511-compute@developer.gserviceaccount.com" --role "roles/datastore.owner"
+
+
+nest generate library fire-store
+
+
+Enable IAM API
+
+https://cloud.google.com/iam/docs/keys-create-delete#macos
+
+
+
+gcloud config set project cloud-app-services
+
+gcloud projects add-iam-policy-binding cloud-app-services \
+    --member="serviceAccount:616634861511-compute@developer.gserviceaccount.com" \
+    --role="roles/datastore.owner"
+
+Database id must be specified in the FireStore initialization along with projecid and key path.
+
+
+{
+      provide: Firestore,
+      inject: [ConfigService],
+      useFactory: () => {
+        const firestore = new Firestore({
+          projectId: 'cloud-app-services', //configService.get<string>('GCP_CLOUD_APPS_PROJECT_ID'),
+          keyFilename:
+            '/Users/tnvpandian/Downloads/cloud-app-services-2cf38d70b766.json',
+          databaseId: 'cloud-apps-fire-store',
+          //configService.get<string>(
+          //  'GCP_CLOUD_APPS_SA_KEY_FILE_PATH',
+          // ), // Path to your JSON key
+        });
+        console.log('Firestore Instance created', firestore);
+        return firestore;
+      },
+}
+
+
+#### Logging
+npm install pino pino-pretty

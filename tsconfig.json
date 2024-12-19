@@ -17,6 +17,19 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {}
+    "paths": {
+      "@app/fire-store": [
+        "libs/fire-store/src"
+      ],
+      "@app/fire-store/*": [
+        "libs/fire-store/src/*"
+      ],
+      "@app/global": [
+        "libs/global/src"
+      ],
+      "@app/global/*": [
+        "libs/global/src/*"
+      ]
+    }
   }
 }

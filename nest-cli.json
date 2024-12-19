@@ -27,6 +27,24 @@
       "compilerOptions": {
         "tsConfigPath": "apps/jobs-service/tsconfig.app.json"
       }
+    },
+    "fire-store": {
+      "type": "library",
+      "root": "libs/fire-store",
+      "entryFile": "index",
+      "sourceRoot": "libs/fire-store/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/fire-store/tsconfig.lib.json"
+      }
+    },
+    "global": {
+      "type": "library",
+      "root": "libs/global",
+      "entryFile": "index",
+      "sourceRoot": "libs/global/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/global/tsconfig.lib.json"
+      }
     }
   }
 }
